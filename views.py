@@ -209,7 +209,7 @@ def index2(request):
 
     a = "<h1>aa</h1>"
     return render(request, 'index2.html',
-                  {'youtube_link': final_link[0], 'data': script_data, 'script': response.text, 'script2': a, 'video_id':video.video_key})
+                  {'youtube_link': final_link[0], 'data': script_data, 'script': response.text, 'script2': a, 'video_id':video.id})
 
 
 @login_required(login_url='common:login')
@@ -366,29 +366,15 @@ def sign_up_complete(request):
     return redirect('common:login')
 
 
-def add_memo(request, video_key):
+def add_memo(request, video_id):
     if request.method == "POST":
         text = request.POST.get('text')
-        video = Video.objects.get(video_key=video_key, user=request.user)
 
-        Memo.objects.create(video=video, text=text, user=request.user)
-
-        return render(request, 'memo.html')
+        Memo.objects.create(video_id=video_id, text=text, user=request.user)
+        return HttpResponse()
     else:
         return JsonResponse({'error': 'Bad requst'}, status=400)
 
-
-
-
-
-
-
-        text = request.POST.get('text')
-
-
-
-        return render(request, 'memo.html')
-    return JsonResponse({'error': 'Bad request,'}, status=400)
 
 
 # views.py
@@ -417,7 +403,7 @@ def delete_memo(request):
 
 def edit_memo(request):
     if request.method == "POST":
-
+    
         memo_id = request.POST.get('memo_id')
         edited_text = request.POST.get('text')
 
@@ -436,19 +422,16 @@ def edit_memo(request):
 
 
 #memo 보기 탭
-def list_memo(request):
-    # 예제 데이터 리스트
-    # data_list = ['사과', '바나나', '체리']
-    video = Video.objects.filter(user=request.user)
-    video_pk = video.id
+def list_memo(request, video_id):
 
-    data_list = Memo.objects.filter(user=request.user, video_id=video_pk).values('id', 'text').order_by('id')
+    data_list = Memo.objects.filter(user=request.user, video_id=video_id).values('id', 'text').order_by('id')
     print(data_list)
-    print("ok")
+    
 
     # print(data_list)
     # JsonResponse를 사용하여 데이터를 JSON 형태로 반환
     return JsonResponse({'items': list(data_list)})
+
 
 
 

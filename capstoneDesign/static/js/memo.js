@@ -5,7 +5,7 @@ $(document).ready(function() {
         // Get the form data
         var formData = $(this).serialize();
         var videoId = $('#add-memo-form [name="video_id"]').val()
-
+        console.log(videoId);
         var url = '/add-memo/' + encodeURIComponent(videoId) + '/'
 
         console.log(videoId)
@@ -95,11 +95,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    //메모 보기 탭
+    // 메모 보기 탭
     $(document).ready(function () {
         $("#loadMemo").click(function () {
+
+            var videoId = $(this).data("video-id");
+            console.log(videoId);
+            var url = '/list-memo/' + encodeURIComponent(videoId) + '/'
+
             $.ajax({
-                url: '/list-memo/', // 요청을 보낼 서버의 URL
+                url: url, // 요청을 보낼 서버의 URL
                 type: 'get', // HTTP 메소드
                 dataType: 'json', // 응답 데이터 타입
                 success: function (response) {
