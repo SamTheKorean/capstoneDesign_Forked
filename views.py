@@ -427,7 +427,7 @@ def edit_memo(request):
 #memo 보기 탭
 def list_memo(request, video_id):
 
-    data_list = Memo.objects.filter(user=request.user, video_id=video_id).values('id', 'text').order_by('id')
+    data_list = Memo.objects.filter(user=request.user, video_id=video_id).values('id', 'text','current_time').order_by('id')
     print(data_list)
     
 

@@ -100,8 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
-
     // 메모 보기 탭
     $(document).ready(function () {
         $("#loadMemo").click(function () {
@@ -123,8 +121,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         // 이미 목록에 있는 아이템인지 확인
                        if (!$(`#memo-list li[data-id="${item.id}"]`).length) {
                         const memoItem = document.createElement("li"); // 새 리스트 생성
-                        const currentTime = player.getCurrentTime()
-                        const changeTime = changeSeconds(currentTime)
+                        var currentTime = item.current_time;
+                        var changedTime = changeSeconds(currentTime);
 
                         memoItem.className = "list-group list-group-item"; // 부트스트랩 5 목록 그룹 클래스 추가
                         memoItem.setAttribute("data-id", item.id); // 아이디 속성 추가
@@ -132,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="row align-items-center">
                                 <div class="col-9">
                                     <div class="d-flex align-items-center">
-                                        <div class="btn btn-primary btn-sm btn-fixed-size" style="width: 55px" href="#" role="button" onclick="moveTime(${currentTime});">${changeTime}</div>
+                                        <div class="btn btn-primary btn-sm btn-fixed-size" style="width: 55px" href="#" role="button" onclick="moveTime(${currentTime});">${changedTime}</div>
                                         <div class="text-start ms-2 memo-container">${item.text}</div>
                                     </div>
                                 </div>
