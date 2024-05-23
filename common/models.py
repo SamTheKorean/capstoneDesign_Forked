@@ -11,3 +11,7 @@ class Memo(models.Model):
     text = models.CharField(max_length=600, null=True)  # 메모 내용
     user = models.ForeignKey(authUser, on_delete=models.CASCADE, null=True)
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    current_time = models.FloatField(null=True, blank=True)  # Add this line for current_time
+
+
+    

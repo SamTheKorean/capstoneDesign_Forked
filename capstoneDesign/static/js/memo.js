@@ -2,6 +2,13 @@ $(document).ready(function() {
     $('#add-memo-form').submit(function(event) {
         event.preventDefault(); // Prevent default form submission
 
+
+        if (typeof player !== 'undefined') {
+            var currentTime = player.getCurrentTime();
+            console.log("rear" + currentTime);
+            $('#currenttime').val(currentTime); // Set the value of the hidden input field
+        }
+
         // Get the form data
         var formData = $(this).serialize();
         var videoId = $('#add-memo-form [name="video_id"]').val()

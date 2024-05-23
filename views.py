@@ -369,8 +369,11 @@ def sign_up_complete(request):
 def add_memo(request, video_id):
     if request.method == "POST":
         text = request.POST.get('text')
+        current_time = request.POST.get('currenttime')
+        
+        
 
-        Memo.objects.create(video_id=video_id, text=text, user=request.user)
+        Memo.objects.create(video_id=video_id, text=text, user=request.user, current_time=current_time)
         return HttpResponse()
     else:
         return JsonResponse({'error': 'Bad requst'}, status=400)
