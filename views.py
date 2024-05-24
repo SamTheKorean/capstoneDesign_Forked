@@ -414,7 +414,7 @@ def edit_memo(request):
             memo = Memo.objects.get(id=memo_id)
             memo.text = edited_text
             memo.save()
-            data_list = Memo.objects.filter(user=request.user).values('id', 'text').order_by('id')
+            data_list = Memo.objects.filter(id = memo_id,text=edited_text).values('id', 'text').order_by('id')
             return JsonResponse({'items': list(data_list)})
         except Memo.DoesNotExist:
             return JsonResponse({'success': False, 'message': '해당 메모를 찾을 수 없습니다.'})
@@ -430,8 +430,6 @@ def list_memo(request, video_id):
     data_list = Memo.objects.filter(user=request.user, video_id=video_id).values('id', 'text','current_time').order_by('id')
     print(data_list)
     
-
-    # print(data_list)
     # JsonResponse를 사용하여 데이터를 JSON 형태로 반환
     return JsonResponse({'items': list(data_list)})
 

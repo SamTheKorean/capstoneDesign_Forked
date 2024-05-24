@@ -82,7 +82,7 @@
 
                         <div id="memo-list">
                             <ul id="dataList">
-                           
+                
                            
                             </ul>
                         </div>
@@ -196,6 +196,23 @@
 </div>
 
 <canvas id="drawing-canvas"></canvas>
+
+<script type="text/template" id="memo-template">
+    <li class="list-group list-group-item" data-id="{{id}}">
+        <div class="row align-items-center">
+            <div class="col-9">
+                <div class="d-flex align-items-center">
+                    <div class="btn btn-primary btn-sm btn-fixed-size" style="width: 55px" href="#" role="button" onclick="moveTime({{current_time}});">{{changed_time}}</div>
+                    <div class="text-start ms-2 memo-container memo-text">{{text}}</div>
+                </div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-sm btn-primary editMemo" type="button">수정</button>
+                <button class="btn btn-sm btn-danger deleteMemo" type="button">삭제</button>
+            </div>
+        </div>
+    </li>
+</script>
 
 <script>
 
